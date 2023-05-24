@@ -1,11 +1,11 @@
 import React from "react";
 
-function moviesList(){
+function addReview(){
     return(
         <div className={"App"}>
-            Movies List
+            Review List
         </div>
     )
 }
 
-export default moviesList;
+export default addReview;

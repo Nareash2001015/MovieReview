@@ -1,11 +1,11 @@
 import React from "react";
 
-function moviesList(){
+function movie(){
     return(
         <div className={"App"}>
-            Movies List
+            Movie
         </div>
     )
 }
 
-export default moviesList;
+export default movie;
