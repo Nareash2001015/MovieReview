@@ -52,7 +52,7 @@ function App() {
             </Container>
         </Navbar>
         <Routes>
-            <Route path={"/movies"} element={moviesList()}></Route>
+            <Route path={"/"} element={moviesList()}></Route>
             <Route path={"/movies/:id/review"} element={(props) =>
                 <addReview {...props} user={user}/>
             }>

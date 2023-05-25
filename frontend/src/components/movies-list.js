@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card'
 
 const MoviesList = props => {
     const [movies, setMovies] = useState([]);
@@ -17,6 +18,7 @@ const MoviesList = props => {
     useEffect(() => {
         retrieveMovies();
         retrieveRatings();
+        console.log("Hey");
     }, []);
 
     const retrieveMovies = () => {
@@ -33,11 +35,11 @@ const MoviesList = props => {
     const retrieveRatings = () => {
         MovieDataService.getRatings()
             .then(response => {
-                console.log(response.data);
-                setRatings(["All Ratings"].concat(response.data));
+                console.log(response.data.ratings);
+                setRatings(["All Ratings"].concat(response.data.ratings));
             })
             .catch(error => {
-                console.log(error);
+                console.log({errorOnRetrievingRatings: error});
             })
     }
     const onChangeSearchTitle = e => {
@@ -49,7 +51,6 @@ const MoviesList = props => {
         setSearchRatings(searchRating);
     }
 
-
     return (
         <div className="App">
             <Container>
@@ -60,14 +61,14 @@ const MoviesList = props => {
                                 <Form.Control
                                 type={"text"}
                                 placeholder={"Search by title"}
-                                value={"searchTitle"}
+                                value={searchTitle}
                                 onChange={onChangeSearchTitle}>
                                 </Form.Control>
                             </Form.Group>
                             <Button
                             variant={"primary"}
-                            type={"button"}
-                            onClick={findByTitle}>
+                            type={"button"}>
+                                Search
                             </Button>
                         </Col>
                         <Col>
@@ -86,12 +87,41 @@ const MoviesList = props => {
                             </Form.Group>
                             <Button
                             variant={"primary"}
-                            type={"button"}
-                            onClick={findByRating}>
+                            type={"button"}>
+                                Search
                             </Button>
                         </Col>
                     </Row>
                 </Form>
+                <Row>
+                    {movies.map(movie => {
+                        let part;
+                        if(movie.poster){
+                            part = <Card.Img src={movie.poster + "/100px180"} />
+                        }
+                        else{
+                            part = <div style={{backgroundColor: "#fff"}}></div>;
+                        }
+                        return (
+                            <Col>
+                                <Card style={{width: `18rem`}}>
+                                    {part}
+                                    <Card.Body>
+                                        <Card.Title>
+                                            {movie.title}
+                                        </Card.Title>
+                                        <Card.Text>
+                                            Rating: {movie.rated}
+                                        </Card.Text>
+                                        <Link to={"/movies/" + movie._id}>
+                                            View Reviews
+                                        </Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        )
+                    })}
+                </Row>
             </Container>
         </div>
     );
