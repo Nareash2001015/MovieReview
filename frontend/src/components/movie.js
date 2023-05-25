@@ -3,7 +3,7 @@ import React from "react";
 function movie(){
     return(
         <div className={"App"}>
-            Movie
+            Movie List
         </div>
     )
 }

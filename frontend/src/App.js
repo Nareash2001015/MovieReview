@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import './App.css';
 import {Route, Link, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactTags from 'react-tag-autocomplete';
 import addReview from "./components/add-review";
 import moviesList from "./components/movies-list";
 import movie from "./components/movie";
@@ -13,7 +12,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Movie from "./components/movie";
-
 
 function App() {
     const [user, setUser] = useState(null);
