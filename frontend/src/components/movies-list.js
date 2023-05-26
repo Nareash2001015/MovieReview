@@ -18,13 +18,12 @@ const MoviesList = props => {
     useEffect(() => {
         retrieveMovies();
         retrieveRatings();
-        console.log("Hey");
     }, []);
 
     const retrieveMovies = () => {
         MovieDataService.getAll()
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 setMovies(response.data.movies);
             })
             .catch(error => {
@@ -32,10 +31,29 @@ const MoviesList = props => {
             })
     }
 
+    const find = (query, by) => {
+        MovieDataService.find(query, by)
+            .then(response => {
+                // console.log(response.data);
+                setMovies(response.data.movies)
+            })
+            .catch(error => {
+                console.log({ErrorOnFindingByQuery: error});
+            })
+    }
+
+    const findByTitle = () => {
+        find(searchTitle, 'title');
+    }
+
+    const findByRating = () => {
+        find(searchRatings, 'rated');
+    }
+
     const retrieveRatings = () => {
         MovieDataService.getRatings()
             .then(response => {
-                console.log(response.data.ratings);
+                // console.log(response.data.ratings);
                 setRatings(["All Ratings"].concat(response.data.ratings));
             })
             .catch(error => {
@@ -67,7 +85,8 @@ const MoviesList = props => {
                             </Form.Group>
                             <Button
                             variant={"primary"}
-                            type={"button"}>
+                            type={"button"}
+                            onClick={findByTitle}>
                                 Search
                             </Button>
                         </Col>
@@ -87,7 +106,8 @@ const MoviesList = props => {
                             </Form.Group>
                             <Button
                             variant={"primary"}
-                            type={"button"}>
+                            type={"button"}
+                            onClick={findByRating}>
                                 Search
                             </Button>
                         </Col>

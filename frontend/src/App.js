@@ -5,13 +5,12 @@ import {Route, Link, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import addReview from "./components/add-review";
 import moviesList from "./components/movies-list";
-import movie from "./components/movie";
-import login from "./components/login";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Movie from "./components/movie";
+import Login from "./components/login";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -53,16 +52,17 @@ function App() {
         </Navbar>
         <Routes>
             <Route path={"/"} element={moviesList()}></Route>
+            <Route path={"/movies"} element={moviesList()}></Route>
             <Route path={"/movies/:id/review"} element={(props) =>
                 <addReview {...props} user={user}/>
             }>
             </Route>
-            <Route path={"/movies/:id"} element={(props) =>
-                <movie {...props} user={user}/>
+            <Route path={"/movies/:id"} element={
+                <Movie user={user}/>
             }>
             </Route>
             <Route path={"/login"} element={(props) =>
-                <login {...props} login={login}/>
+                <Login {...props} login={Login}/>
             }>
             </Route>
         </Routes>
