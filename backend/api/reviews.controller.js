@@ -50,7 +50,7 @@ export default class  ReviewsController{
                 throw new error("unable to update review. User may not be original poster");
             }
 
-            console.log({Success: "Success"});
+            res.status(200).json({Success: "Success"});
 
         }catch (error){
             res.status(500).send({errorPutRequest : error})

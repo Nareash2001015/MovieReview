@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import './App.css';
 import {Route, Link, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import addReview from "./components/add-review";
+import AddReview from "./components/add-review";
 import moviesList from "./components/movies-list";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -14,6 +14,7 @@ import Login from "./components/login";
 
 function App() {
     const [user, setUser] = useState(null);
+
     async function login(user = null){
         setUser(user);
     }
@@ -21,6 +22,8 @@ function App() {
     async function logout(){
         setUser(null);
     }
+
+
 
   return (
     <div className="App">
@@ -53,16 +56,16 @@ function App() {
         <Routes>
             <Route path={"/"} element={moviesList()}></Route>
             <Route path={"/movies"} element={moviesList()}></Route>
-            <Route path={"/movies/:id/review"} element={(props) =>
-                <addReview {...props} user={user}/>
+            <Route path={"/movies/:id/review"} element={
+                <AddReview user={user}/>
             }>
             </Route>
             <Route path={"/movies/:id"} element={
                 <Movie user={user}/>
             }>
             </Route>
-            <Route path={"/login"} element={(props) =>
-                <Login {...props} login={Login}/>
+            <Route path={"/login"} element={
+                <Login login={login}/>
             }>
             </Route>
         </Routes>

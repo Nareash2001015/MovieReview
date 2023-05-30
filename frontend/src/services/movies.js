@@ -23,7 +23,7 @@ class MovieDataService{
     }
 
     deleteReview(id, userID){
-        return axios.put(`http://localhost:5000/api/v1/movies/review`, {data: {review_id: id, user_id: userID}});
+        return axios.delete(`http://localhost:5000/api/v1/movies/review`, {data: {review_id: id, user_id: userID}});
     }
 
     getRatings(){
